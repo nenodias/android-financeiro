@@ -1,4 +1,4 @@
-package br.edu.ite.financeiroandroid;
+package br.edu.ite.financeiroandroid.util;
 
 public class ActivitiesUtil {
 

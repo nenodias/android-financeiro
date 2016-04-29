@@ -1,12 +1,13 @@
-package br.edu.ite.financeiroandroid;
+package br.edu.ite.financeiroandroid.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import br.edu.ite.financeiroandroid.R;
 
 public class MainActivity extends BaseActivity {
 
@@ -29,6 +30,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("Android Financeiro V1.0");
 
         btnListarPessoas = (Button) findViewById( R.id.menu_btn_listar_cad );
         btnCadastrarPessoa = (Button) findViewById( R.id.menu_btn_cadastrar_cad );

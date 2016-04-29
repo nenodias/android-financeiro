@@ -1,13 +1,11 @@
-package br.edu.ite.financeiroandroid;
+package br.edu.ite.financeiroandroid.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+
+import br.edu.ite.financeiroandroid.R;
+import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
 
 public class BaseActivity extends AppCompatActivity {
 

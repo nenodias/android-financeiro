@@ -1,15 +1,16 @@
-package br.edu.ite.financeiroandroid;
+package br.edu.ite.financeiroandroid.activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import br.edu.ite.financeiroandroid.R;
 import br.edu.ite.financeiroandroid.model.TipoLancamento;
+import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
 
 public class CadastroLancamentoActivity extends BaseActivity {
 
@@ -31,6 +32,7 @@ public class CadastroLancamentoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_lancamento);
+        setTitle("Cadastrar Lançamentos");
 
         btnListar = (Button) findViewById( R.id.lan_btn_listar );
         btnSalvar = (Button) findViewById( R.id.lan_btn_salvar );

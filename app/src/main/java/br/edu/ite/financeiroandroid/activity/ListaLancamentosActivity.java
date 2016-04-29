@@ -1,10 +1,13 @@
-package br.edu.ite.financeiroandroid;
+package br.edu.ite.financeiroandroid.activity;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+
+import br.edu.ite.financeiroandroid.R;
+import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
 
 public class ListaLancamentosActivity extends BaseActivity {
 
@@ -19,6 +22,7 @@ public class ListaLancamentosActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_lancamentos);
+        setTitle("Listar Lançamentos");
 
         btnNovo = (Button) findViewById( R.id.lan_btn_novo );
         lista = (ListView) findViewById( R.id.lan_lista );

@@ -1,11 +1,13 @@
-package br.edu.ite.financeiroandroid;
+package br.edu.ite.financeiroandroid.activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+
+import br.edu.ite.financeiroandroid.R;
+import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
 
 public class ListaPessoasActivity extends BaseActivity {
 
@@ -20,6 +22,7 @@ public class ListaPessoasActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_pessoas);
+         setTitle("Listar Pessoas");
 
         btnNovo = (Button) findViewById( R.id.cad_btn_novo );
         lista = (ListView) findViewById( R.id.cad_lista );
@@ -31,5 +34,6 @@ public class ListaPessoasActivity extends BaseActivity {
             }
         });
     }
+
 
 }

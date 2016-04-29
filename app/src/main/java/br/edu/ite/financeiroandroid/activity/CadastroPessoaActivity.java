@@ -1,11 +1,13 @@
-package br.edu.ite.financeiroandroid;
+package br.edu.ite.financeiroandroid.activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import br.edu.ite.financeiroandroid.R;
+import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
 
 public class CadastroPessoaActivity extends BaseActivity {
 
@@ -22,6 +24,7 @@ public class CadastroPessoaActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_pessoa);
+        setTitle("Cadastrar Pessoas");
 
         btnListar = (Button) findViewById( R.id.cad_btn_listar );
         btnSalvar = (Button) findViewById( R.id.cad_btn_salvar );
