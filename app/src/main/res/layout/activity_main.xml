@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="br.edu.ite.financeiroandroid.activity.MainActivity"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    style="@style/fundo"
+    >
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <Button
             android:layout_width="match_parent"
