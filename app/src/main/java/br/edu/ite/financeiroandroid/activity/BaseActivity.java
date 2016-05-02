@@ -3,9 +3,14 @@ package br.edu.ite.financeiroandroid.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.EditText;
+import android.widget.Spinner;
+
+import org.apache.commons.lang3.StringUtils;
 
 import br.edu.ite.financeiroandroid.R;
 import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
+import br.edu.ite.financeiroandroid.util.ColorUtils;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -42,5 +47,31 @@ public class BaseActivity extends AppCompatActivity {
         if(i != null) {
             startActivityForResult(i, ActivitiesUtil.MAIN);
         }
+    }
+
+    protected boolean isValidField( Spinner component ){
+        if(component != null){
+            if(component.getSelectedItem() == null ){
+                component.setBackgroundColor( ColorUtils.VERMELHO );
+                return false;
+            }else{
+                component.setBackgroundColor( ColorUtils.BRANCO );
+                return true;
+            }
+        }
+        return true;
+    }
+
+    protected boolean isValidField(EditText component){
+        if(component != null){
+            if(StringUtils.isBlank(component.getText())){
+                component.setBackgroundColor( ColorUtils.VERMELHO );
+                return false;
+            }else{
+                component.setBackgroundColor( ColorUtils.BRANCO );
+                return true;
+            }
+        }
+        return true;
     }
 }

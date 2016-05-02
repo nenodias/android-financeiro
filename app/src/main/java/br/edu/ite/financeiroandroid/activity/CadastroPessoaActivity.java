@@ -6,13 +6,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+
 import br.edu.ite.financeiroandroid.R;
+import br.edu.ite.financeiroandroid.model.Pessoa;
+import br.edu.ite.financeiroandroid.model.TipoLancamento;
 import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
+import br.edu.ite.financeiroandroid.util.ColorUtils;
 
 public class CadastroPessoaActivity extends BaseActivity {
 
     private Context context = CadastroPessoaActivity.this;
     private Integer origem;
+    private Pessoa entidade = new Pessoa();
 
     private EditText codigo;
     private EditText nome;
@@ -43,6 +52,26 @@ public class CadastroPessoaActivity extends BaseActivity {
                 finish();
             }
         });
+        btnSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                salvar();
+            }
+        });
+    }
+
+    private void salvar() {
+        if(isValid()){
+            entidade.setNome(this.nome.getText().toString());
+        }
+    }
+
+    private boolean isValid() {
+        boolean validacao = true;
+        if( !isValidField(nome) ){
+            return false;
+        }
+        return validacao;
     }
 
 }

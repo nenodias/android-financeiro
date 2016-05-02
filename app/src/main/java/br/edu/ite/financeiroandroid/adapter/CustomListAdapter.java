@@ -12,9 +12,9 @@ import br.edu.ite.financeiroandroid.adapter.dto.ItemAdapterDTO;
 
 public abstract class CustomListAdapter extends BaseAdapter{
 
-    private final List<ItemAdapterDTO> items;
-    private final Context context;
-    private final LayoutInflater inflater;
+    protected final List<ItemAdapterDTO> items;
+    protected final Context context;
+    protected final LayoutInflater inflater;
 
     public CustomListAdapter(Context context, List<ItemAdapterDTO> items) {
         this.context = context;

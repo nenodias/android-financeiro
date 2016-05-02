@@ -6,7 +6,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.edu.ite.financeiroandroid.R;
+import br.edu.ite.financeiroandroid.adapter.LancamentoListAdapter;
+import br.edu.ite.financeiroandroid.adapter.dto.ItemAdapterDTO;
 import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
 
 public class ListaLancamentosActivity extends BaseActivity {
@@ -33,6 +38,11 @@ public class ListaLancamentosActivity extends BaseActivity {
                 finish();
             }
         });
+        List<ItemAdapterDTO> items = new ArrayList<>();
+        //Carregar os Dados
+        //items.add( new ItemAdapterDTO() );
+
+        lista.setAdapter( new LancamentoListAdapter( context, items) );
     }
 
 }
