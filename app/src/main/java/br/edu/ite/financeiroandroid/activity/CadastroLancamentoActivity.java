@@ -69,7 +69,7 @@ public class CadastroLancamentoActivity extends BaseActivity {
 
         if( isModel(getIntent()) ){
             Lancamento lancamento = (Lancamento)getIntent().getExtras().getSerializable("model");
-            this.codigo.setText(lancamento.getCodigo());
+            this.codigo.setText(lancamento.getCodigo().toString());
             this.descricao.setText(lancamento.getDescricao());
             this.valor.setText( String.valueOf( lancamento.getValor() ) );
             for (int i = 0 ; i < this.tipo.getAdapter().getCount() ; i++ ){
@@ -81,7 +81,7 @@ public class CadastroLancamentoActivity extends BaseActivity {
             }
             for (int i = 0 ; i < this.pessoa.getAdapter().getCount() ; i++ ){
                 Pessoa pessoaItem = (Pessoa) this.pessoa.getAdapter().getItem(i);
-                if( pessoaItem.getCodigo().equals(lancamento.getCodigo()) ){
+                if( lancamento.getPessoa() != null && pessoaItem.getCodigo().equals(lancamento.getPessoa().getCodigo()) ){
                     pessoa.setSelection(i);
                     break;
                 }
@@ -89,7 +89,7 @@ public class CadastroLancamentoActivity extends BaseActivity {
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             this.dataVencimento.setText( format.format(lancamento.getDataVencimento() ) );
             if( lancamento .getDataPagamento() != null) {
-                this.dataVencimento.setText(format.format(lancamento.getDataPagamento()));
+                this.dataVencimento.setText( format.format(lancamento.getDataPagamento() ) );
             }
             this.entidade = lancamento;
         }
