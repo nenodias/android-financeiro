@@ -1,11 +1,14 @@
 package br.edu.ite.financeiroandroid.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +45,7 @@ public class ListaPessoasActivity extends BaseActivity {
             }
         });
         lista.setOnItemLongClickListener(this.excluirItem);
-        lista.setOnItemSelectedListener(this.editarItem);
+        lista.setOnItemClickListener(this.editarItem);
         List<ItemAdapterDTO> items = new ArrayList<>();
         for(Pessoa pessoa : DadosUtil.pessoaList){
             ItemAdapterDTO dto = new ItemAdapterDTO();
@@ -50,7 +53,7 @@ public class ListaPessoasActivity extends BaseActivity {
             items.add( dto  );
         }
 
-        lista.setAdapter( new PessoaListAdapter( context, items) );
+        lista.setAdapter(new PessoaListAdapter(context, items) );
     }
 
 
@@ -64,5 +67,17 @@ public class ListaPessoasActivity extends BaseActivity {
     @Override
     protected void editar(View v, int position, Long id) {
         super.editar(v, position, id);
+        Pessoa pessoa = DadosUtil.pessoaList.get(position);
+        Bundle data = new Bundle();
+        data.putSerializable("model", (Serializable) pessoa);
+        Intent intent = new Intent();
+        intent.putExtras(data);
+        setResult(ActivitiesUtil.CADASTRO_PESSOA, intent );
+        finish();
+    }
+
+    @Override
+    public Context getAppContext() {
+        return context;
     }
 }

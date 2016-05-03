@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,10 +14,12 @@ import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serializable;
+
 import br.edu.ite.financeiroandroid.R;
 import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     public static final String CAMPO_REQUERIDO = "Campo requerido";
 
@@ -27,10 +30,10 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        resolverRetorno(resultCode);
+        resolverRetorno(resultCode, data);
     }
 
-    protected void resolverRetorno(int id){
+    protected void resolverRetorno(int id, Intent data){
         Intent i = null;
         switch ( id ){
             case ActivitiesUtil.LISTAR_PESSOA:
@@ -51,8 +54,20 @@ public class BaseActivity extends AppCompatActivity {
                 break;
         }
         if(i != null) {
+            if (isModel(data)){
+                Serializable model = data.getExtras().getSerializable("model");
+                i.putExtra("model", model);
+            }
             startActivityForResult(i, ActivitiesUtil.MAIN);
         }
+    }
+
+    protected boolean isModel(Intent data) {
+        return data != null && hasModel(data.getExtras());
+    }
+
+    protected boolean hasModel(Bundle data) {
+        return data != null && data.getSerializable("model") != null;
     }
 
     protected boolean isValidField( Spinner component ){
@@ -109,14 +124,10 @@ public class BaseActivity extends AppCompatActivity {
         }
     };
 
-    protected AdapterView.OnItemSelectedListener editarItem = new AdapterView.OnItemSelectedListener() {
+    protected AdapterView.OnItemClickListener editarItem = new AdapterView.OnItemClickListener() {
         @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             editar(view, position, id);
-        }
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-            editar(null, -1, -1L);
         }
     };
 
@@ -132,7 +143,9 @@ public class BaseActivity extends AppCompatActivity {
                 }
             });
             builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface arg0, int arg1) {}
+                public void onClick(DialogInterface arg0, int arg1) {
+                    listar();
+                }
             });
             AlertDialog alerta = builder.create();
             alerta.show();
@@ -140,11 +153,19 @@ public class BaseActivity extends AppCompatActivity {
     };
 
     protected void messageSave(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getAppContext());
         builder.setTitle("Sucesso");
         builder.setMessage("Registro salvo com sucesso!");
         builder.setCancelable(true);
-        builder.create().show();
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                listar();
+            }
+        });
+        AlertDialog alerta = builder.create();
+        alerta.show();
+
     }
 
     protected View.OnClickListener salvarClick = new View.OnClickListener() {
@@ -153,4 +174,11 @@ public class BaseActivity extends AppCompatActivity {
             salvar();
         }
     };
+
+    public abstract Context getAppContext();
+
+    public Integer getInteger(EditText field){
+        Integer codigo = StringUtils.isNotBlank(field.getText()) ? Integer.valueOf(field.getText().toString()) : 0;
+        return codigo;
+    }
 }

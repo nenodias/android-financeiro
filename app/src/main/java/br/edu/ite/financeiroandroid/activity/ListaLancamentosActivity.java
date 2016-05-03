@@ -42,7 +42,7 @@ public class ListaLancamentosActivity extends BaseActivity {
             }
         });
         lista.setOnItemLongClickListener(this.excluirItem);
-        lista.setOnItemSelectedListener(this.editarItem);
+        lista.setOnItemClickListener(this.editarItem);
         List<ItemAdapterDTO> items = new ArrayList<>();
         for(Lancamento lancamento : DadosUtil.lancamentoList){
             ItemAdapterDTO dto = new ItemAdapterDTO();
@@ -58,4 +58,10 @@ public class ListaLancamentosActivity extends BaseActivity {
     protected void excluir(View v, int position, Long id) {
         super.excluir(v, position, id);
     }
+
+    @Override
+    public Context getAppContext() {
+        return context;
+    }
+
 }

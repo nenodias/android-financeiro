@@ -3,10 +3,11 @@ package br.edu.ite.financeiroandroid.model;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Lancamento {
+public class Lancamento implements Serializable {
 
     private Integer codigo;
 

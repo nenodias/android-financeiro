@@ -59,10 +59,10 @@ public class CadastroLancamentoActivity extends BaseActivity {
         dataVencimento = (EditText) findViewById( R.id.lan_txt_data_vencimento );
         dataPagamento = (EditText) findViewById( R.id.lan_txt_data_pagamento );
 
-        initialize();
+        initialize(savedInstanceState);
     }
 
-    private void initialize() {
+    private void initialize(Bundle savedInstanceState) {
         btnListar.setOnClickListener(listarClick);
         btnSalvar.setOnClickListener(salvarClick);
 
@@ -71,10 +71,38 @@ public class CadastroLancamentoActivity extends BaseActivity {
 
         ArrayAdapter<Pessoa> pessoaAdapter = new ArrayAdapter<Pessoa>(context, android.R.layout.simple_list_item_1, DadosUtil.pessoaList );
         pessoa.setAdapter(pessoaAdapter);
+
+        if( isModel(getIntent()) ){
+            Lancamento lancamento = (Lancamento)getIntent().getExtras().getSerializable("model");
+            this.codigo.setText(lancamento.getCodigo());
+            this.descricao.setText(lancamento.getDescricao());
+            this.valor.setText( String.valueOf( lancamento.getValor() ) );
+            for (int i = 0 ; i < this.tipo.getAdapter().getCount() ; i++ ){
+                TipoLancamento tipoItem = (TipoLancamento)this.tipo.getAdapter().getItem(i);
+                if(tipoItem.equals(lancamento.getTipo())){
+                    tipo.setSelection(i);
+                    break;
+                }
+            }
+            for (int i = 0 ; i < this.pessoa.getAdapter().getCount() ; i++ ){
+                Pessoa pessoaItem = (Pessoa) this.pessoa.getAdapter().getItem(i);
+                if( pessoaItem.getCodigo().equals(lancamento.getCodigo()) ){
+                    pessoa.setSelection(i);
+                    break;
+                }
+            }
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            this.dataVencimento.setText( format.format(lancamento.getDataVencimento() ) );
+            if( lancamento .getDataPagamento() != null) {
+                this.dataVencimento.setText(format.format(lancamento.getDataPagamento()));
+            }
+        }
     }
 
     protected void salvar() {
         if(isValid()){
+            Integer codigo = getInteger(this.codigo);
+            entidade.setCodigo(codigo);
             entidade.setDescricao(this.descricao.getText().toString());
             entidade.setTipo( (TipoLancamento) this.tipo.getSelectedItem() );
             entidade.setPessoa( (Pessoa) this.pessoa.getSelectedItem() );
@@ -104,7 +132,6 @@ public class CadastroLancamentoActivity extends BaseActivity {
         //Persiste
         DadosUtil.lancamentoList.add(entidade);
         messageSave();
-        listar();
     }
 
     private boolean isValid() {
@@ -122,6 +149,11 @@ public class CadastroLancamentoActivity extends BaseActivity {
     protected void listar() {
         setResult(ActivitiesUtil.LISTAR_LANCAMENTO);
         finish();
+    }
+
+    @Override
+    public Context getAppContext() {
+        return context;
     }
 
 }

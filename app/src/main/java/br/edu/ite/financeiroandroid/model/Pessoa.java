@@ -3,7 +3,9 @@ package br.edu.ite.financeiroandroid.model;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class Pessoa {
+import java.io.Serializable;
+
+public class Pessoa implements Serializable{
 
     private Integer codigo;
 
@@ -43,5 +45,10 @@ public class Pessoa {
                 .append(codigo)
                 .append(nome)
                 .toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return getCodigo() + "-" + getNome();
     }
 }

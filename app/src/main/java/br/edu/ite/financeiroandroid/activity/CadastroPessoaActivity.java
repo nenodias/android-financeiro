@@ -43,16 +43,24 @@ public class CadastroPessoaActivity extends BaseActivity {
         codigo = (EditText) findViewById( R.id.cad_txt_codigo );
         nome = (EditText) findViewById( R.id.cad_txt_nome );
 
-        initialize();
+        initialize(savedInstanceState);
     }
 
-    private void initialize() {
+    private void initialize(Bundle savedInstanceState) {
         btnListar.setOnClickListener(listarClick);
         btnSalvar.setOnClickListener(salvarClick);
+        if( isModel(getIntent()) ){
+            Pessoa pessoa = (Pessoa)getIntent().getExtras().getSerializable("model");
+            this.codigo.setText( pessoa.getCodigo().toString() );
+            this.nome.setText( pessoa.getNome() );
+        }
     }
 
     protected void salvar() {
         if(isValid()){
+            Integer codigo = getInteger(this.codigo);
+            entidade.setCodigo(codigo);
+            entidade.setCodigo(codigo);
             entidade.setNome(this.nome.getText().toString());
         }
         //Persiste
@@ -73,6 +81,11 @@ public class CadastroPessoaActivity extends BaseActivity {
             return false;
         }
         return validacao;
+    }
+
+    @Override
+    public Context getAppContext() {
+        return context;
     }
 
 }

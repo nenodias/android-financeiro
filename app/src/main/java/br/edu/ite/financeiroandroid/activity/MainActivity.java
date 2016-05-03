@@ -22,7 +22,7 @@ public class MainActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             int id = v.getId();
-            resolverRetorno(id);
+            resolverRetorno(id, null);
         }
     };
 
@@ -56,5 +56,10 @@ public class MainActivity extends BaseActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public Context getAppContext() {
+        return context;
     }
 }
