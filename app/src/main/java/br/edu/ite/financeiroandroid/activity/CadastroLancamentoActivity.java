@@ -1,6 +1,8 @@
 package br.edu.ite.financeiroandroid.activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -20,7 +22,7 @@ import br.edu.ite.financeiroandroid.model.Lancamento;
 import br.edu.ite.financeiroandroid.model.Pessoa;
 import br.edu.ite.financeiroandroid.model.TipoLancamento;
 import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
-import br.edu.ite.financeiroandroid.util.ColorUtils;
+import br.edu.ite.financeiroandroid.util.DadosUtil;
 
 public class CadastroLancamentoActivity extends BaseActivity {
 
@@ -61,26 +63,17 @@ public class CadastroLancamentoActivity extends BaseActivity {
     }
 
     private void initialize() {
-        btnListar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setResult(ActivitiesUtil.LISTAR_LANCAMENTO);
-                finish();
-            }
-        });
+        btnListar.setOnClickListener(listarClick);
+        btnSalvar.setOnClickListener(salvarClick);
 
-        btnSalvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                salvar();
-            }
-        });
+        ArrayAdapter<TipoLancamento> tipoAdapter = new ArrayAdapter<TipoLancamento>(context, android.R.layout.simple_list_item_1, TipoLancamento.values() );
+        tipo.setAdapter(tipoAdapter);
 
-        ArrayAdapter<TipoLancamento> arrayAdapter = new ArrayAdapter<TipoLancamento>(context, android.R.layout.simple_list_item_1, TipoLancamento.values() );
-        tipo.setAdapter(arrayAdapter);
+        ArrayAdapter<Pessoa> pessoaAdapter = new ArrayAdapter<Pessoa>(context, android.R.layout.simple_list_item_1, DadosUtil.pessoaList );
+        pessoa.setAdapter(pessoaAdapter);
     }
 
-    private void salvar() {
+    protected void salvar() {
         if(isValid()){
             entidade.setDescricao(this.descricao.getText().toString());
             entidade.setTipo( (TipoLancamento) this.tipo.getSelectedItem() );
@@ -88,14 +81,14 @@ public class CadastroLancamentoActivity extends BaseActivity {
             try {
                 entidade.setValor(new BigDecimal(this.valor.getText().toString()));
             }catch (Exception ex){
-                valor.setBackgroundColor( ColorUtils.VERMELHO );
+                valor.setError("Valor inválido");
                 return;
             }
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             try {
                 entidade.setDataVencimento( format.parse( dataVencimento.getText().toString() ) );
             }catch (Exception ex){
-                dataVencimento.setBackgroundColor( ColorUtils.VERMELHO );
+                dataVencimento.setError( "Data Vencimento inválida" );
                 return;
             }
 
@@ -103,32 +96,32 @@ public class CadastroLancamentoActivity extends BaseActivity {
                 try {
                     entidade.setDataPagamento(format.parse(dataPagamento.getText().toString()));
                 } catch (Exception ex) {
-                    dataPagamento.setBackgroundColor(ColorUtils.VERMELHO);
+                    dataPagamento.setError( "Data Pagamento inválida" );
                     return;
                 }
             }
         }
+        //Persiste
+        DadosUtil.lancamentoList.add(entidade);
+        messageSave();
+        listar();
     }
 
     private boolean isValid() {
         boolean validacao = true;
-        //Descricao
-        if( !isValidField(descricao) ){
-            return false;
-        }
-        if( !isValidField(valor) ){
-            return false;
-        }
-        if( !isValidField(tipo) ){
-            return false;
-        }
-        if( !isValidField(pessoa) ){
-            return false;
-        }
-        if( !isValidField(dataVencimento) ){
-            return false;
-        }
+        boolean descricaoValid = isValidField(descricao);
+        boolean valorValid = isValidField(valor);
+        boolean tipoValid = isValidField(tipo);
+        boolean pessoaValid = isValidField(pessoa);
+        boolean dataVencimentoValid = isValidField(dataVencimento);
+        validacao = descricaoValid && valorValid && tipoValid && pessoaValid && dataVencimentoValid;
         return validacao;
+    }
+
+    @Override
+    protected void listar() {
+        setResult(ActivitiesUtil.LISTAR_LANCAMENTO);
+        finish();
     }
 
 }

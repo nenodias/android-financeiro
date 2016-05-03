@@ -12,7 +12,10 @@ import java.util.List;
 import br.edu.ite.financeiroandroid.R;
 import br.edu.ite.financeiroandroid.adapter.LancamentoListAdapter;
 import br.edu.ite.financeiroandroid.adapter.dto.ItemAdapterDTO;
+import br.edu.ite.financeiroandroid.model.Lancamento;
+import br.edu.ite.financeiroandroid.model.Pessoa;
 import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
+import br.edu.ite.financeiroandroid.util.DadosUtil;
 
 public class ListaLancamentosActivity extends BaseActivity {
 
@@ -38,11 +41,21 @@ public class ListaLancamentosActivity extends BaseActivity {
                 finish();
             }
         });
+        lista.setOnItemLongClickListener(this.excluirItem);
+        lista.setOnItemSelectedListener(this.editarItem);
         List<ItemAdapterDTO> items = new ArrayList<>();
-        //Carregar os Dados
-        //items.add( new ItemAdapterDTO() );
+        for(Lancamento lancamento : DadosUtil.lancamentoList){
+            ItemAdapterDTO dto = new ItemAdapterDTO();
+            dto.setLancameto(lancamento);
+            items.add( dto  );
+        }
 
         lista.setAdapter( new LancamentoListAdapter( context, items) );
     }
 
+
+    @Override
+    protected void excluir(View v, int position, Long id) {
+        super.excluir(v, position, id);
+    }
 }

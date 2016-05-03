@@ -14,7 +14,7 @@ public class PessoaListSupport {
 
     public PessoaListSupport(View v) {
         this.codigo = (TextView) v.findViewById(R.id.cad_txt_col_codigo);
-        this.nome = (TextView) v.findViewById(R.id.cad_txt_col_codigo);
+        this.nome = (TextView) v.findViewById(R.id.cad_txt_col_nome);
     }
 
     public void setValues(ItemAdapterDTO values) {

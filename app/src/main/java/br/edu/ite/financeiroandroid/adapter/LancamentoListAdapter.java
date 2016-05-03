@@ -18,12 +18,10 @@ public class LancamentoListAdapter extends CustomListAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LancamentoListSupport itemSupport = null;
-        if(convertView != null){
-            convertView = inflater.inflate(R.layout.layout_lancamento, null);
-            itemSupport = new LancamentoListSupport(convertView);
-            convertView.setTag(itemSupport);
-            itemSupport.setValues( items.get(position) );
-        }
+        convertView = inflater.inflate(R.layout.layout_lancamento, null);
+        itemSupport = new LancamentoListSupport(convertView);
+        convertView.setTag(itemSupport);
+        itemSupport.setValues( items.get(position) );
         return convertView;
     }
 }

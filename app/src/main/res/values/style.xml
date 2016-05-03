@@ -6,7 +6,7 @@
         <!-- Customize your theme here. -->
     </style>
     <style name="fundo">
-        <item name="android:background">@drawable/bg</item>
+        <!--<item name="android:background">@drawable/bg</item> -->
     </style>
 
 </resources>

@@ -13,7 +13,9 @@ import br.edu.ite.financeiroandroid.R;
 import br.edu.ite.financeiroandroid.adapter.LancamentoListAdapter;
 import br.edu.ite.financeiroandroid.adapter.PessoaListAdapter;
 import br.edu.ite.financeiroandroid.adapter.dto.ItemAdapterDTO;
+import br.edu.ite.financeiroandroid.model.Pessoa;
 import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
+import br.edu.ite.financeiroandroid.util.DadosUtil;
 
 public class ListaPessoasActivity extends BaseActivity {
 
@@ -39,12 +41,28 @@ public class ListaPessoasActivity extends BaseActivity {
                 finish();
             }
         });
+        lista.setOnItemLongClickListener(this.excluirItem);
+        lista.setOnItemSelectedListener(this.editarItem);
         List<ItemAdapterDTO> items = new ArrayList<>();
-        //Carregar os Dados
-        //items.add( new ItemAdapterDTO() );
+        for(Pessoa pessoa : DadosUtil.pessoaList){
+            ItemAdapterDTO dto = new ItemAdapterDTO();
+            dto.setPessoa(pessoa);
+            items.add( dto  );
+        }
 
         lista.setAdapter( new PessoaListAdapter( context, items) );
     }
 
 
+    @Override
+    protected void excluir(View v, int position, Long id) {
+        super.excluir(v, position, id);
+        //Excluir Dado
+        DadosUtil.pessoaList.remove(position);
+    }
+
+    @Override
+    protected void editar(View v, int position, Long id) {
+        super.editar(v, position, id);
+    }
 }

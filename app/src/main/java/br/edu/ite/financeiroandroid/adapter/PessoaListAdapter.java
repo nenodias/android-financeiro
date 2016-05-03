@@ -18,12 +18,10 @@ public class PessoaListAdapter extends CustomListAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         PessoaListSupport itemSupport = null;
-        if(convertView != null){
-            convertView = inflater.inflate(R.layout.layout_pessoas, null);
-            itemSupport = new PessoaListSupport(convertView);
-            convertView.setTag(itemSupport);
-            itemSupport.setValues( items.get(position) );
-        }
+        convertView = inflater.inflate(R.layout.layout_pessoas, null);
+        itemSupport = new PessoaListSupport(convertView);
+        convertView.setTag(itemSupport);
+        itemSupport.setValues( items.get(position) );
         return convertView;
     }
 }
