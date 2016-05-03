@@ -15,6 +15,7 @@ import android.widget.TextView;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
+import java.util.List;
 
 import br.edu.ite.financeiroandroid.R;
 import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
@@ -120,7 +121,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             builder.setCancelable(true);
             AlertDialog alerta = builder.create();
             alerta.show();
-            return false;
+            return true;
         }
     };
 
@@ -177,8 +178,13 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public abstract Context getAppContext();
 
-    public Integer getInteger(EditText field){
-        Integer codigo = StringUtils.isNotBlank(field.getText()) ? Integer.valueOf(field.getText().toString()) : 0;
+    public Integer getAutoIncrement(EditText field, List<? extends Object> lista){
+        Integer codigo = null;
+        if(lista != null){
+            codigo = StringUtils.isNotBlank(field.getText()) ? Integer.valueOf(field.getText().toString()) : lista.size();
+        }else {
+            codigo = StringUtils.isNotBlank(field.getText()) ? Integer.valueOf(field.getText().toString()) : 0;
+        }
         return codigo;
     }
 }

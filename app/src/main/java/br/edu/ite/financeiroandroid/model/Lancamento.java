@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Lancamento implements Serializable {
+public class Lancamento implements Serializable, Comparable<Lancamento> {
 
     private Integer codigo;
 
@@ -135,6 +135,17 @@ public class Lancamento implements Serializable {
         this.pessoa = pessoa;
         if(pessoa != null){
             this.idPessoa = pessoa.getCodigo();
+        }
+    }
+
+    @Override
+    public int compareTo(Lancamento another) {
+        if(another != null && another.getCodigo() != null && getCodigo() != null && another.getCodigo().equals(getCodigo())){
+            return 0;
+        }else if(another != null){
+            return getCodigo() <= another.getCodigo() ? -1 : 1;
+        }else{
+            return -1;
         }
     }
 }

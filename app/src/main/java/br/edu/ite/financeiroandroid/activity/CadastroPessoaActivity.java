@@ -1,21 +1,12 @@
 package br.edu.ite.financeiroandroid.activity;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import org.apache.commons.lang3.StringUtils;
-
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-
 import br.edu.ite.financeiroandroid.R;
 import br.edu.ite.financeiroandroid.model.Pessoa;
-import br.edu.ite.financeiroandroid.model.TipoLancamento;
 import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
 import br.edu.ite.financeiroandroid.util.DadosUtil;
 
@@ -58,15 +49,13 @@ public class CadastroPessoaActivity extends BaseActivity {
 
     protected void salvar() {
         if(isValid()){
-            Integer codigo = getInteger(this.codigo);
-            entidade.setCodigo(codigo);
+            Integer codigo = getAutoIncrement(this.codigo, DadosUtil.pessoaList);
             entidade.setCodigo(codigo);
             entidade.setNome(this.nome.getText().toString());
+            //Persiste
+            DadosUtil.addPessoa(entidade);
+            messageSave();
         }
-        //Persiste
-        DadosUtil.pessoaList.add(entidade);
-        messageSave();
-        listar();
     }
 
     @Override

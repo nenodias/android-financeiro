@@ -62,6 +62,13 @@ public class ListaPessoasActivity extends BaseActivity {
         super.excluir(v, position, id);
         //Excluir Dado
         DadosUtil.pessoaList.remove(position);
+        listar();
+    }
+
+    @Override
+    protected void listar() {
+        setResult(ActivitiesUtil.LISTAR_PESSOA);
+        finish();
     }
 
     @Override

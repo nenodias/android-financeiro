@@ -1,16 +1,11 @@
 package br.edu.ite.financeiroandroid.activity;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -55,7 +50,7 @@ public class CadastroLancamentoActivity extends BaseActivity {
         descricao = (EditText) findViewById( R.id.lan_txt_descricao );
         valor = (EditText) findViewById( R.id.lan_txt_valor );
         tipo = (Spinner) findViewById( R.id.lan_txt_tipo );
-        pessoa = (Spinner) findViewById( R.id.lan_txt_tipo );
+        pessoa = (Spinner) findViewById( R.id.lan_txt_pessoa );
         dataVencimento = (EditText) findViewById( R.id.lan_txt_data_vencimento );
         dataPagamento = (EditText) findViewById( R.id.lan_txt_data_pagamento );
 
@@ -101,7 +96,7 @@ public class CadastroLancamentoActivity extends BaseActivity {
 
     protected void salvar() {
         if(isValid()){
-            Integer codigo = getInteger(this.codigo);
+            Integer codigo = getAutoIncrement(this.codigo, DadosUtil.lancamentoList);
             entidade.setCodigo(codigo);
             entidade.setDescricao(this.descricao.getText().toString());
             entidade.setTipo( (TipoLancamento) this.tipo.getSelectedItem() );
@@ -128,10 +123,10 @@ public class CadastroLancamentoActivity extends BaseActivity {
                     return;
                 }
             }
+            //Persiste
+            DadosUtil.addLancamento(entidade);
+            messageSave();
         }
-        //Persiste
-        DadosUtil.lancamentoList.add(entidade);
-        messageSave();
     }
 
     private boolean isValid() {

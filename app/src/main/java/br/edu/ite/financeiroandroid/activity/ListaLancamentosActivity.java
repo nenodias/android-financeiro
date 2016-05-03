@@ -57,6 +57,14 @@ public class ListaLancamentosActivity extends BaseActivity {
     @Override
     protected void excluir(View v, int position, Long id) {
         super.excluir(v, position, id);
+        DadosUtil.lancamentoList.remove(position);
+        listar();
+    }
+
+    @Override
+    protected void listar() {
+        setResult(ActivitiesUtil.LISTAR_LANCAMENTO);
+        finish();
     }
 
     @Override

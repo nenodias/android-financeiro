@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.io.Serializable;
 
-public class Pessoa implements Serializable{
+public class Pessoa implements Serializable, Comparable<Pessoa>{
 
     private Integer codigo;
 
@@ -50,5 +50,16 @@ public class Pessoa implements Serializable{
     @Override
     public String toString() {
         return getCodigo() + "-" + getNome();
+    }
+
+    @Override
+    public int compareTo(Pessoa another) {
+        if(another != null && another.getCodigo() != null && getCodigo() != null && another.getCodigo().equals(getCodigo())){
+            return 0;
+        }else if(another != null){
+            return getCodigo() <= another.getCodigo() ? -1 : 1;
+        }else{
+            return -1;
+        }
     }
 }
