@@ -91,6 +91,7 @@ public class CadastroLancamentoActivity extends BaseActivity {
             if( lancamento .getDataPagamento() != null) {
                 this.dataVencimento.setText(format.format(lancamento.getDataPagamento()));
             }
+            this.entidade = lancamento;
         }
     }
 

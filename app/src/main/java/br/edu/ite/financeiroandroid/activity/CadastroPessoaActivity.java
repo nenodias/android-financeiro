@@ -44,6 +44,7 @@ public class CadastroPessoaActivity extends BaseActivity {
             Pessoa pessoa = (Pessoa)getIntent().getExtras().getSerializable("model");
             this.codigo.setText( pessoa.getCodigo().toString() );
             this.nome.setText( pessoa.getNome() );
+            this.entidade = pessoa;
         }
     }
 
