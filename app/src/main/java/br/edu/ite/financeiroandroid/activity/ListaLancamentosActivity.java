@@ -1,11 +1,13 @@
 package br.edu.ite.financeiroandroid.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +61,18 @@ public class ListaLancamentosActivity extends BaseActivity {
         super.excluir(v, position, id);
         DadosUtil.lancamentoList.remove(position);
         listar();
+    }
+
+    @Override
+    protected void editar(View v, int position, Long id) {
+        super.editar(v, position, id);
+        Lancamento lancamento = DadosUtil.lancamentoList.get(position);
+        Bundle data = new Bundle();
+        data.putSerializable("model", (Serializable) lancamento);
+        Intent intent = new Intent();
+        intent.putExtras(data);
+        setResult(ActivitiesUtil.CADASTRO_LANCAMENTO, intent);
+        finish();
     }
 
     @Override

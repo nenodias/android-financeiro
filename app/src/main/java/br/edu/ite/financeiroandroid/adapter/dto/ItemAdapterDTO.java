@@ -32,6 +32,7 @@ public class ItemAdapterDTO {
         getValores().put("descricao", lancamento.getDescricao());
         getValores().put("valor", String.valueOf( lancamento.getValor() ) );
         getValores().put("tipo", lancamento.getTipo().getDescricao() );
+        getValores().put("pessoa", lancamento.getPessoa().toString() );
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         getValores().put("dataVencimento", format.format( lancamento.getDataVencimento() ) );
         getValores().put("dataPagamento", lancamento.getDataPagamento() != null ?  format.format( lancamento.getDataPagamento() ) : StringUtils.EMPTY );
