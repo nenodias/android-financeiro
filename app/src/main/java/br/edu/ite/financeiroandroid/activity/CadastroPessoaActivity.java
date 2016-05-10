@@ -6,6 +6,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import br.edu.ite.financeiroandroid.R;
+import br.edu.ite.financeiroandroid.dao.PessoaDAO;
+import br.edu.ite.financeiroandroid.factory.ActivityFactory;
 import br.edu.ite.financeiroandroid.model.Pessoa;
 import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
 import br.edu.ite.financeiroandroid.util.DadosUtil;
@@ -21,6 +23,8 @@ public class CadastroPessoaActivity extends BaseActivity {
 
     private Button btnListar;
     private Button btnSalvar;
+
+    private PessoaDAO pessoaDao = new PessoaDAO();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +54,7 @@ public class CadastroPessoaActivity extends BaseActivity {
 
     protected void salvar() {
         if(isValid()){
-            Integer codigo = getAutoIncrement(this.codigo, DadosUtil.pessoaList);
+            Integer codigo = ActivitiesUtil.getAutoIncrement(this.codigo, pessoaDao.findAll() );
             entidade.setCodigo(codigo);
             entidade.setNome(this.nome.getText().toString());
             //Persiste
@@ -61,13 +65,13 @@ public class CadastroPessoaActivity extends BaseActivity {
 
     @Override
     protected void listar() {
-        setResult(ActivitiesUtil.LISTAR_PESSOA);
+        setResult(ActivityFactory.LISTAR_PESSOA);
         finish();
     }
 
     private boolean isValid() {
         boolean validacao = true;
-        if( !isValidField(nome) ){
+        if( !ActivitiesUtil.isValidField(nome) ){
             return false;
         }
         return validacao;

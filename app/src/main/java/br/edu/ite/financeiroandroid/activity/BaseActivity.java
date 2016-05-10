@@ -18,15 +18,16 @@ import java.io.Serializable;
 import java.util.List;
 
 import br.edu.ite.financeiroandroid.R;
+import br.edu.ite.financeiroandroid.factory.ActivityFactory;
 import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    public static final String CAMPO_REQUERIDO = "Campo requerido";
-
     protected Context getContext(){
         return BaseActivity.this;
     };
+
+    private ActivityFactory factory = new ActivityFactory( getContext() );
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -35,31 +36,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void resolverRetorno(int id, Intent data){
-        Intent i = null;
-        switch ( id ){
-            case ActivitiesUtil.LISTAR_PESSOA:
-            case R.id.menu_btn_listar_cad:
-                i = new Intent(getContext(), ListaPessoasActivity.class);
-                break;
-            case ActivitiesUtil.CADASTRO_PESSOA:
-            case R.id.menu_btn_cadastrar_cad:
-                i = new Intent(getContext(), CadastroPessoaActivity.class);
-                break;
-            case ActivitiesUtil.LISTAR_LANCAMENTO:
-            case R.id.menu_btn_listar_lan:
-                i = new Intent(getContext(), ListaLancamentosActivity.class);
-                break;
-            case ActivitiesUtil.CADASTRO_LANCAMENTO:
-            case R.id.menu_btn_cadastrar_lan:
-                i = new Intent(getContext(), CadastroLancamentoActivity.class);
-                break;
-        }
+        Intent i = factory.createActivity(id);
         if(i != null) {
             if (isModel(data)){
                 Serializable model = data.getExtras().getSerializable("model");
                 i.putExtra("model", model);
             }
-            startActivityForResult(i, ActivitiesUtil.MAIN);
+            startActivityForResult(i, ActivityFactory.MAIN);
         }
     }
 
@@ -69,31 +52,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected boolean hasModel(Bundle data) {
         return data != null && data.getSerializable("model") != null;
-    }
-
-    protected boolean isValidField( Spinner component ){
-        if(component != null){
-            if(component.getSelectedItem() == null ){
-                TextView errorText = (TextView)component.getSelectedView();
-                errorText.setError(CAMPO_REQUERIDO);
-                return false;
-            }else{
-                return true;
-            }
-        }
-        return true;
-    }
-
-    protected boolean isValidField(EditText component){
-        if(component != null){
-            if(StringUtils.isBlank(component.getText())){
-                component.setError(CAMPO_REQUERIDO);
-                return false;
-            }else{
-                return true;
-            }
-        }
-        return true;
     }
 
     protected void excluir(View v, int position, Long id){}
@@ -166,7 +124,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         });
         AlertDialog alerta = builder.create();
         alerta.show();
-
     }
 
     protected View.OnClickListener salvarClick = new View.OnClickListener() {
@@ -178,13 +135,4 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public abstract Context getAppContext();
 
-    public Integer getAutoIncrement(EditText field, List<? extends Object> lista){
-        Integer codigo = null;
-        if(lista != null){
-            codigo = StringUtils.isNotBlank(field.getText()) ? Integer.valueOf(field.getText().toString()) : lista.size();
-        }else {
-            codigo = StringUtils.isNotBlank(field.getText()) ? Integer.valueOf(field.getText().toString()) : 0;
-        }
-        return codigo;
-    }
 }

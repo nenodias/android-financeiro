@@ -13,6 +13,9 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 
 import br.edu.ite.financeiroandroid.R;
+import br.edu.ite.financeiroandroid.dao.LancamentoDAO;
+import br.edu.ite.financeiroandroid.dao.PessoaDAO;
+import br.edu.ite.financeiroandroid.factory.ActivityFactory;
 import br.edu.ite.financeiroandroid.model.Lancamento;
 import br.edu.ite.financeiroandroid.model.Pessoa;
 import br.edu.ite.financeiroandroid.model.TipoLancamento;
@@ -36,6 +39,10 @@ public class CadastroLancamentoActivity extends BaseActivity {
 
     private Button btnListar;
     private Button btnSalvar;
+
+    private LancamentoDAO dao = new LancamentoDAO();
+
+    private PessoaDAO pessoaDao = new PessoaDAO();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +71,7 @@ public class CadastroLancamentoActivity extends BaseActivity {
         ArrayAdapter<TipoLancamento> tipoAdapter = new ArrayAdapter<TipoLancamento>(context, android.R.layout.simple_list_item_1, TipoLancamento.values() );
         tipo.setAdapter(tipoAdapter);
 
-        ArrayAdapter<Pessoa> pessoaAdapter = new ArrayAdapter<Pessoa>(context, android.R.layout.simple_list_item_1, DadosUtil.pessoaList );
+        ArrayAdapter<Pessoa> pessoaAdapter = new ArrayAdapter<Pessoa>(context, android.R.layout.simple_list_item_1, pessoaDao.findAll() );
         pessoa.setAdapter(pessoaAdapter);
 
         if( isModel(getIntent()) ){
@@ -97,7 +104,7 @@ public class CadastroLancamentoActivity extends BaseActivity {
 
     protected void salvar() {
         if(isValid()){
-            Integer codigo = getAutoIncrement(this.codigo, DadosUtil.lancamentoList);
+            Integer codigo = ActivitiesUtil.getAutoIncrement(this.codigo, DadosUtil.lancamentoList);
             entidade.setCodigo(codigo);
             entidade.setDescricao(this.descricao.getText().toString());
             entidade.setTipo( (TipoLancamento) this.tipo.getSelectedItem() );
@@ -125,25 +132,25 @@ public class CadastroLancamentoActivity extends BaseActivity {
                 }
             }
             //Persiste
-            DadosUtil.addLancamento(entidade);
+            dao.save(entidade);
             messageSave();
         }
     }
 
     private boolean isValid() {
         boolean validacao = true;
-        boolean descricaoValid = isValidField(descricao);
-        boolean valorValid = isValidField(valor);
-        boolean tipoValid = isValidField(tipo);
-        boolean pessoaValid = isValidField(pessoa);
-        boolean dataVencimentoValid = isValidField(dataVencimento);
+        boolean descricaoValid = ActivitiesUtil.isValidField(descricao);
+        boolean valorValid = ActivitiesUtil.isValidField(valor);
+        boolean tipoValid = ActivitiesUtil.isValidField(tipo);
+        boolean pessoaValid = ActivitiesUtil.isValidField(pessoa);
+        boolean dataVencimentoValid = ActivitiesUtil.isValidField(dataVencimento);
         validacao = descricaoValid && valorValid && tipoValid && pessoaValid && dataVencimentoValid;
         return validacao;
     }
 
     @Override
     protected void listar() {
-        setResult(ActivitiesUtil.LISTAR_LANCAMENTO);
+        setResult(ActivityFactory.LISTAR_LANCAMENTO);
         finish();
     }
 

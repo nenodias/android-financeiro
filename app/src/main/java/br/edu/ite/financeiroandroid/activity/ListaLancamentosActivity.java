@@ -14,6 +14,8 @@ import java.util.List;
 import br.edu.ite.financeiroandroid.R;
 import br.edu.ite.financeiroandroid.adapter.LancamentoListAdapter;
 import br.edu.ite.financeiroandroid.adapter.dto.ItemAdapterDTO;
+import br.edu.ite.financeiroandroid.dao.LancamentoDAO;
+import br.edu.ite.financeiroandroid.factory.ActivityFactory;
 import br.edu.ite.financeiroandroid.model.Lancamento;
 import br.edu.ite.financeiroandroid.model.Pessoa;
 import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
@@ -28,6 +30,8 @@ public class ListaLancamentosActivity extends BaseActivity {
 
     private ListView lista;
 
+    private LancamentoDAO dao = new LancamentoDAO();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,14 +43,14 @@ public class ListaLancamentosActivity extends BaseActivity {
         btnNovo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setResult(ActivitiesUtil.CADASTRO_LANCAMENTO);
+                setResult(ActivityFactory.CADASTRO_LANCAMENTO);
                 finish();
             }
         });
         lista.setOnItemLongClickListener(this.excluirItem);
         lista.setOnItemClickListener(this.editarItem);
         List<ItemAdapterDTO> items = new ArrayList<>();
-        for(Lancamento lancamento : DadosUtil.lancamentoList){
+        for(Lancamento lancamento : dao.findAll()){
             ItemAdapterDTO dto = new ItemAdapterDTO();
             dto.setLancameto(lancamento);
             items.add( dto  );
@@ -59,25 +63,25 @@ public class ListaLancamentosActivity extends BaseActivity {
     @Override
     protected void excluir(View v, int position, Long id) {
         super.excluir(v, position, id);
-        DadosUtil.lancamentoList.remove(position);
+        dao.delete(position);
         listar();
     }
 
     @Override
     protected void editar(View v, int position, Long id) {
         super.editar(v, position, id);
-        Lancamento lancamento = DadosUtil.lancamentoList.get(position);
+        Lancamento lancamento = dao.findById(position);
         Bundle data = new Bundle();
         data.putSerializable("model", (Serializable) lancamento);
         Intent intent = new Intent();
         intent.putExtras(data);
-        setResult(ActivitiesUtil.CADASTRO_LANCAMENTO, intent);
+        setResult(ActivityFactory.CADASTRO_LANCAMENTO, intent);
         finish();
     }
 
     @Override
     protected void listar() {
-        setResult(ActivitiesUtil.LISTAR_LANCAMENTO);
+        setResult(ActivityFactory.LISTAR_LANCAMENTO);
         finish();
     }
 
