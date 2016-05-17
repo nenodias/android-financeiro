@@ -62,14 +62,16 @@ public class ListaLancamentosActivity extends BaseActivity {
     @Override
     protected void excluir(View v, int position, Long id) {
         super.excluir(v, position, id);
-        dao.delete(position);
+        Integer pk = ItemAdapterDTO.getPkFromList(lista, position);
+        dao.delete(pk);
         listar();
     }
 
     @Override
     protected void editar(View v, int position, Long id) {
         super.editar(v, position, id);
-        Lancamento lancamento = dao.findById(position);
+        Integer pk = ItemAdapterDTO.getPkFromList(lista, position);
+        Lancamento lancamento = dao.findById(pk);
         Bundle data = new Bundle();
         data.putSerializable("model", (Serializable) lancamento);
         Intent intent = new Intent();

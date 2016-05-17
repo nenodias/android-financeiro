@@ -13,17 +13,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aba61ec1-8619-4f12-991d-df560a0ea98f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/util/ActivitiesUtil.java" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/util/ActivitiesUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/activity/CadastroLancamentoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/activity/CadastroLancamentoActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/activity/CadastroPessoaActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/activity/CadastroPessoaActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/dao/GenericDao.java" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/dao/GenericDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/adapter/dto/ItemAdapterDTO.java" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/adapter/dto/ItemAdapterDTO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/dao/LancamentoDAO.java" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/dao/LancamentoDAO.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/activity/ListaLancamentosActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/activity/ListaLancamentosActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/activity/ListaPessoasActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/activity/ListaPessoasActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/dao/PessoaDAO.java" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/dao/PessoaDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/dao/PessoaDAOBanco.java" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/dao/PessoaDAOBanco.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="android-financeiro.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,11 +38,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CadastroPessoaActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/activity/CadastroPessoaActivity.java">
+      <file leaf-file-name="CadastroLancamentoActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/activity/CadastroLancamentoActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1360">
-              <caret line="29" column="12" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="973" max-vertical-offset="2499">
+              <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -85,8 +75,8 @@
       <file leaf-file-name="ListaLancamentosActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/activity/ListaLancamentosActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.03736264" vertical-offset="204" max-vertical-offset="1275">
-              <caret line="31" column="26" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.4857143" vertical-offset="612" max-vertical-offset="1309">
+              <caret line="70" column="58" selection-start-line="70" selection-start-column="58" selection-end-line="70" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -108,8 +98,8 @@
       <file leaf-file-name="LancamentoDAOBanco.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/dao/LancamentoDAOBanco.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.5789473" vertical-offset="1836" max-vertical-offset="2397">
-              <caret line="133" column="9" selection-start-line="133" selection-start-column="9" selection-end-line="133" selection-end-column="9" />
+            <state vertical-scroll-proportion="-2.9824562" vertical-offset="0" max-vertical-offset="2397">
+              <caret line="23" column="47" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -1594,13 +1584,13 @@
         <option value="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/util/FactoryDAO.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/activity/CadastroLancamentoActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/activity/CadastroPessoaActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/activity/ListaLancamentosActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/activity/ListaPessoasActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/dao/LancamentoDAO.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/dao/PessoaDAOBanco.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/dao/DatabaseDAO.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/util/ApplicationUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/dao/LancamentoDAOBanco.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/activity/ListaLancamentosActivity.java" />
       </list>
     </option>
   </component>
@@ -2412,14 +2402,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/activity/CadastroLancamentoActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="2499">
-          <caret line="42" column="20" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/activity/CadastroPessoaActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1360">
@@ -2497,16 +2479,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/dao/LancamentoDAOBanco.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5789473" vertical-offset="1836" max-vertical-offset="2397">
-          <caret line="133" column="9" selection-start-line="133" selection-start-column="9" selection-end-line="133" selection-end-column="9" />
+        <state vertical-scroll-proportion="-2.9824562" vertical-offset="0" max-vertical-offset="2397">
+          <caret line="23" column="47" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/activity/CadastroLancamentoActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="973" max-vertical-offset="2499">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/br/edu/ite/financeiroandroid/activity/ListaLancamentosActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.03736264" vertical-offset="204" max-vertical-offset="1275">
-          <caret line="31" column="26" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.4857143" vertical-offset="612" max-vertical-offset="1309">
+          <caret line="70" column="58" selection-start-line="70" selection-start-column="58" selection-end-line="70" selection-end-column="58" />
           <folding />
         </state>
       </provider>
