@@ -138,7 +138,9 @@ public class LancamentoDAO extends DatabaseDAO implements ILancamentoDAO {
             p.setDataPagamento(dataPagamento);
         }
         if(eager && daoPessoa != null){
-            p.setPessoa( daoPessoa.findById( cursor.getInt(6) ) );
+            Integer fkPessoa = cursor.getInt(6);
+            p.setPessoa( daoPessoa.findById( fkPessoa ) );
+            p.setIdPessoa( fkPessoa );
         }else{
             p.setIdPessoa( cursor.getInt(6) );
         }

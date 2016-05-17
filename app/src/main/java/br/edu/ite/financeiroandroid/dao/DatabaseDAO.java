@@ -26,7 +26,8 @@ public class DatabaseDAO extends SQLiteOpenHelper {
                         " valor VARCHAR(255), "+
                         " data_vencimento LONG, "+
                         " data_pagamento LONG, "+
-                        " id_pessoa INTEGER "+
+                        " id_pessoa INTEGER,"+
+                        "  FOREIGN KEY(id_pessoa) REFERENCES "+ PessoaDAO.TABELA+"( id ) "+
                         ");"
         );
     }
