@@ -4,16 +4,16 @@ import android.content.Context;
 
 import br.edu.ite.financeiroandroid.dao.ILancamentoDAO;
 import br.edu.ite.financeiroandroid.dao.IPessoaDAO;
-import br.edu.ite.financeiroandroid.dao.LancamentoDAOBanco;
-import br.edu.ite.financeiroandroid.dao.PessoaDAOBanco;
+import br.edu.ite.financeiroandroid.dao.LancamentoDAO;
+import br.edu.ite.financeiroandroid.dao.PessoaDAO;
 
 public class FactoryDAO {
 
     public static IPessoaDAO createPessoaDao(Context context){
-        return new PessoaDAOBanco(context);
+        return new PessoaDAO(context);
     }
 
     public static ILancamentoDAO createLancamentoDao(Context context){
-        return new LancamentoDAOBanco(context);
+        return new LancamentoDAO(context);
     }
 }

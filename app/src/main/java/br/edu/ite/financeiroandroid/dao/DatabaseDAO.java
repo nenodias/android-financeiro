@@ -4,8 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import br.edu.ite.financeiroandroid.util.ApplicationUtil;
-
 import static br.edu.ite.financeiroandroid.util.ApplicationUtil.*;
 
 /**
@@ -19,8 +17,8 @@ public class DatabaseDAO extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE "+ PessoaDAOBanco.TABELA +" (id INTEGER PRIMARY KEY, nome VARCHAR(255) );");
-        db.execSQL("CREATE TABLE "+ LancamentoDAOBanco.TABELA +
+        db.execSQL("CREATE TABLE "+ PessoaDAO.TABELA +" (id INTEGER PRIMARY KEY, nome VARCHAR(255) );");
+        db.execSQL("CREATE TABLE "+ LancamentoDAO.TABELA +
                         " ("+
                         "id INTEGER PRIMARY KEY,"+
                         " descricao VARCHAR(255), "+

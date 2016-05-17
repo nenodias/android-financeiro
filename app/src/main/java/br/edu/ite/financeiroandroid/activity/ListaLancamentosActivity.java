@@ -15,7 +15,6 @@ import br.edu.ite.financeiroandroid.R;
 import br.edu.ite.financeiroandroid.adapter.LancamentoListAdapter;
 import br.edu.ite.financeiroandroid.adapter.dto.ItemAdapterDTO;
 import br.edu.ite.financeiroandroid.dao.ILancamentoDAO;
-import br.edu.ite.financeiroandroid.dao.LancamentoDAOBanco;
 import br.edu.ite.financeiroandroid.factory.ActivityFactory;
 import br.edu.ite.financeiroandroid.model.Lancamento;
 import br.edu.ite.financeiroandroid.util.FactoryDAO;
