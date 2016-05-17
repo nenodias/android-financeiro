@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.List;
 
 import br.edu.ite.financeiroandroid.activity.BaseActivity;
+import br.edu.ite.financeiroandroid.dao.GenericDao;
 
 public class ActivitiesUtil {
 
@@ -42,13 +43,4 @@ public class ActivitiesUtil {
         return true;
     }
 
-    public static Integer getAutoIncrement(EditText field, List<? extends Object> lista){
-        Integer codigo = null;
-        if(lista != null){
-            codigo = StringUtils.isNotBlank(field.getText()) ? Integer.valueOf(field.getText().toString()) : lista.size();
-        }else {
-            codigo = StringUtils.isNotBlank(field.getText()) ? Integer.valueOf(field.getText().toString()) : 0;
-        }
-        return codigo;
-    }
 }

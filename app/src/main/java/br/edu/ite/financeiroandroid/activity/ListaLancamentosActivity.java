@@ -14,12 +14,11 @@ import java.util.List;
 import br.edu.ite.financeiroandroid.R;
 import br.edu.ite.financeiroandroid.adapter.LancamentoListAdapter;
 import br.edu.ite.financeiroandroid.adapter.dto.ItemAdapterDTO;
-import br.edu.ite.financeiroandroid.dao.LancamentoDAO;
+import br.edu.ite.financeiroandroid.dao.ILancamentoDAO;
+import br.edu.ite.financeiroandroid.dao.LancamentoDAOBanco;
 import br.edu.ite.financeiroandroid.factory.ActivityFactory;
 import br.edu.ite.financeiroandroid.model.Lancamento;
-import br.edu.ite.financeiroandroid.model.Pessoa;
-import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
-import br.edu.ite.financeiroandroid.util.DadosUtil;
+import br.edu.ite.financeiroandroid.util.FactoryDAO;
 
 public class ListaLancamentosActivity extends BaseActivity {
 
@@ -30,7 +29,7 @@ public class ListaLancamentosActivity extends BaseActivity {
 
     private ListView lista;
 
-    private LancamentoDAO dao = new LancamentoDAO();
+    private ILancamentoDAO dao = FactoryDAO.createLancamentoDao(ListaLancamentosActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

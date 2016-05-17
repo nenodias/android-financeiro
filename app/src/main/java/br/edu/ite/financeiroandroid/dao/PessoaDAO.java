@@ -5,7 +5,12 @@ import java.util.List;
 import br.edu.ite.financeiroandroid.model.Pessoa;
 import br.edu.ite.financeiroandroid.util.DadosUtil;
 
-public class PessoaDAO implements GenericDao<Pessoa>{
+public class PessoaDAO implements IPessoaDAO{
+
+    @Override
+    public Integer nextValue() {
+        return DadosUtil.pessoaList.size()+1;
+    }
 
     @Override
     public Pessoa findById(Integer pk) {

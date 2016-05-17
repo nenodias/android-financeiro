@@ -13,14 +13,14 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 
 import br.edu.ite.financeiroandroid.R;
-import br.edu.ite.financeiroandroid.dao.LancamentoDAO;
-import br.edu.ite.financeiroandroid.dao.PessoaDAO;
+import br.edu.ite.financeiroandroid.dao.ILancamentoDAO;
+import br.edu.ite.financeiroandroid.dao.IPessoaDAO;
 import br.edu.ite.financeiroandroid.factory.ActivityFactory;
 import br.edu.ite.financeiroandroid.model.Lancamento;
 import br.edu.ite.financeiroandroid.model.Pessoa;
 import br.edu.ite.financeiroandroid.model.TipoLancamento;
 import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
-import br.edu.ite.financeiroandroid.util.DadosUtil;
+import br.edu.ite.financeiroandroid.util.FactoryDAO;
 
 public class CadastroLancamentoActivity extends BaseActivity {
 
@@ -40,9 +40,9 @@ public class CadastroLancamentoActivity extends BaseActivity {
     private Button btnListar;
     private Button btnSalvar;
 
-    private LancamentoDAO dao = new LancamentoDAO();
+    private ILancamentoDAO dao = FactoryDAO.createLancamentoDao(CadastroLancamentoActivity.this);
 
-    private PessoaDAO pessoaDao = new PessoaDAO();
+    private IPessoaDAO pessoaDao = FactoryDAO.createPessoaDao(CadastroLancamentoActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,7 @@ public class CadastroLancamentoActivity extends BaseActivity {
         btnSalvar = (Button) findViewById( R.id.lan_btn_salvar );
 
         codigo = (EditText) findViewById( R.id.lan_txt_codigo );
+        codigo.setEnabled(false);
         descricao = (EditText) findViewById( R.id.lan_txt_descricao );
         valor = (EditText) findViewById( R.id.lan_txt_valor );
         tipo = (Spinner) findViewById( R.id.lan_txt_tipo );
@@ -104,7 +105,7 @@ public class CadastroLancamentoActivity extends BaseActivity {
 
     protected void salvar() {
         if(isValid()){
-            Integer codigo = ActivitiesUtil.getAutoIncrement(this.codigo, DadosUtil.lancamentoList);
+            Integer codigo = StringUtils.isNotBlank( this.codigo.getText() ) ? Integer.valueOf( this.codigo.getText().toString() ) : null;
             entidade.setCodigo(codigo);
             entidade.setDescricao(this.descricao.getText().toString());
             entidade.setTipo( (TipoLancamento) this.tipo.getSelectedItem() );

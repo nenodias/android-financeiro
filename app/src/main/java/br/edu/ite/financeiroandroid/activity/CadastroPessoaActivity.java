@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import org.apache.commons.lang3.StringUtils;
+
 import br.edu.ite.financeiroandroid.R;
-import br.edu.ite.financeiroandroid.dao.PessoaDAO;
+import br.edu.ite.financeiroandroid.dao.GenericDao;
+import br.edu.ite.financeiroandroid.dao.IPessoaDAO;
 import br.edu.ite.financeiroandroid.factory.ActivityFactory;
 import br.edu.ite.financeiroandroid.model.Pessoa;
 import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
-import br.edu.ite.financeiroandroid.util.DadosUtil;
+import br.edu.ite.financeiroandroid.util.FactoryDAO;
 
 public class CadastroPessoaActivity extends BaseActivity {
 
@@ -24,7 +27,7 @@ public class CadastroPessoaActivity extends BaseActivity {
     private Button btnListar;
     private Button btnSalvar;
 
-    private PessoaDAO pessoaDao = new PessoaDAO();
+    private IPessoaDAO pessoaDao = FactoryDAO.createPessoaDao(CadastroPessoaActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,7 @@ public class CadastroPessoaActivity extends BaseActivity {
         btnSalvar = (Button) findViewById( R.id.cad_btn_salvar );
 
         codigo = (EditText) findViewById( R.id.cad_txt_codigo );
+        codigo.setEnabled(false);
         nome = (EditText) findViewById( R.id.cad_txt_nome );
 
         initialize(savedInstanceState);
@@ -54,11 +58,11 @@ public class CadastroPessoaActivity extends BaseActivity {
 
     protected void salvar() {
         if(isValid()){
-            Integer codigo = ActivitiesUtil.getAutoIncrement(this.codigo, pessoaDao.findAll() );
+            Integer codigo = StringUtils.isNotBlank( this.codigo.getText() ) ? Integer.valueOf( this.codigo.getText().toString() ) : null;
             entidade.setCodigo(codigo);
             entidade.setNome(this.nome.getText().toString());
             //Persiste
-            DadosUtil.addPessoa(entidade);
+            pessoaDao.save(entidade);
             messageSave();
         }
     }

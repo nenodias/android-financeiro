@@ -3,67 +3,102 @@ package br.edu.ite.financeiroandroid.dao;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ite.financeiroandroid.model.Pessoa;
-import br.edu.ite.financeiroandroid.util.ApplicationUtil;
 
-public class PessoaDAOBanco extends SQLiteOpenHelper implements GenericDao<Pessoa> {
+public class PessoaDAOBanco extends DatabaseDAO implements IPessoaDAO {
 
-    private static final String TABELA = "pessoa";
+    public static final String TABELA = "pessoa";
 
     public PessoaDAOBanco(Context context){
-        super(context, ApplicationUtil.APP_NAME, null, ApplicationUtil.VERSION);
+        super(context);
+    }
+
+    @Override
+    public Integer nextValue() {
+        SQLiteDatabase db = getReadableDatabase();
+        String sql = "SELECT MAX(id) FROM "+ TABELA;
+        Cursor cursor = db.rawQuery(sql, null);
+        Integer max = 0;
+        if(cursor.moveToFirst()){
+            max = cursor.getInt(0);
+        }
+        max++;
+        return max;
     }
 
     @Override
     public Pessoa findById(Integer pk) {
-        return null;
+        Pessoa entidade = null;
+        try{
+            SQLiteDatabase db = getReadableDatabase();
+            String sql = "SELECT * FROM "+ TABELA+ " WHERE id = ? ";
+            Cursor cursor = db.rawQuery(sql, new String[]{ pk.toString() } );
+            if(cursor.moveToFirst()) {
+                entidade = createPessoaByCursos(cursor);
+            }
+        }catch (Exception ex){
+
+        }
+        return entidade;
     }
 
     @Override
     public void save(Pessoa entidade) {
+        if(entidade.getCodigo() == null){
+            saveNew(entidade);
+        }else{
+            update(entidade);
+        }
+    }
+
+    private void update(Pessoa entidade) {
+        if(entidade != null && entidade.getCodigo() != null) {
+            SQLiteDatabase db = getWritableDatabase();
+            String sql = "UPDATE " + TABELA + " SET nome = ? WHERE id = ? ";
+            db.execSQL(sql, new String[]{entidade.getNome(), entidade.getCodigo().toString()});
+        }
+    }
+
+    private void saveNew(Pessoa entidade){
+        entidade.setCodigo( nextValue() );
         SQLiteDatabase db = getWritableDatabase();
         ContentValues valores = new ContentValues();
-        valores.put("codigo", entidade.getCodigo());
+        valores.put("id", entidade.getCodigo());
         valores.put("nome", entidade.getNome());
         db.insert(TABELA, null, valores);
     }
 
     @Override
     public void delete(Integer pk) {
-
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABELA, "id = ?", new String[]{ pk.toString() } );
     }
 
     @Override
     public List<Pessoa> findAll() {
         List<Pessoa> retorno = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        String sql = "SELECT * FROM "+TABELA;
+        String sql = "SELECT * FROM "+ TABELA;
         Cursor cursor = db.rawQuery(sql, null);
         if(cursor.moveToFirst()){
             do{
-                Pessoa p = new Pessoa();
-                p.setCodigo( cursor.getInt(0) );
-                p.setNome(cursor.getString(1));
+                Pessoa p = createPessoaByCursos(cursor);
                 retorno.add(p);
             }while(cursor.moveToNext());
         }
         return retorno;
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-
+    private Pessoa createPessoaByCursos(Cursor cursor) {
+        Pessoa p = new Pessoa();
+        p.setCodigo( cursor.getInt(0) );
+        p.setNome(cursor.getString(1));
+        return p;
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-    }
 }

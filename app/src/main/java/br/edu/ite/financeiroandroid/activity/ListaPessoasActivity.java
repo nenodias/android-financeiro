@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -13,14 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ite.financeiroandroid.R;
-import br.edu.ite.financeiroandroid.adapter.LancamentoListAdapter;
 import br.edu.ite.financeiroandroid.adapter.PessoaListAdapter;
 import br.edu.ite.financeiroandroid.adapter.dto.ItemAdapterDTO;
-import br.edu.ite.financeiroandroid.dao.PessoaDAO;
+import br.edu.ite.financeiroandroid.dao.GenericDao;
+import br.edu.ite.financeiroandroid.dao.IPessoaDAO;
 import br.edu.ite.financeiroandroid.factory.ActivityFactory;
 import br.edu.ite.financeiroandroid.model.Pessoa;
-import br.edu.ite.financeiroandroid.util.ActivitiesUtil;
-import br.edu.ite.financeiroandroid.util.DadosUtil;
+import br.edu.ite.financeiroandroid.util.FactoryDAO;
 
 public class ListaPessoasActivity extends BaseActivity {
 
@@ -31,7 +29,7 @@ public class ListaPessoasActivity extends BaseActivity {
 
     private ListView lista;
 
-    private PessoaDAO dao = new PessoaDAO();
+    private IPessoaDAO dao = FactoryDAO.createPessoaDao(ListaPessoasActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +63,8 @@ public class ListaPessoasActivity extends BaseActivity {
     protected void excluir(View v, int position, Long id) {
         super.excluir(v, position, id);
         //Excluir Dado
-        dao.delete(position);
+        Integer pk = ItemAdapterDTO.getPkFromList(lista, position);
+        dao.delete(pk);
         listar();
     }
 
@@ -78,7 +77,8 @@ public class ListaPessoasActivity extends BaseActivity {
     @Override
     protected void editar(View v, int position, Long id) {
         super.editar(v, position, id);
-        Pessoa pessoa = dao.findById(position);
+        Integer pk = ItemAdapterDTO.getPkFromList(lista, position);
+        Pessoa pessoa = dao.findById(pk);
         Bundle data = new Bundle();
         data.putSerializable("model", (Serializable) pessoa);
         Intent intent = new Intent();

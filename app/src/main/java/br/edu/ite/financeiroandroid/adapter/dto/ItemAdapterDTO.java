@@ -1,5 +1,7 @@
 package br.edu.ite.financeiroandroid.adapter.dto;
 
+import android.widget.ListView;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
@@ -37,4 +39,10 @@ public class ItemAdapterDTO {
         getValores().put("dataVencimento", format.format( lancamento.getDataVencimento() ) );
         getValores().put("dataPagamento", lancamento.getDataPagamento() != null ?  format.format( lancamento.getDataPagamento() ) : StringUtils.EMPTY );
     };
+
+    public static Integer getPkFromList(ListView lista,int position){
+        ItemAdapterDTO item = (ItemAdapterDTO)lista.getItemAtPosition(position);
+        Integer pk = Integer.valueOf( item.getValores().get("codigo") );
+        return pk;
+    }
 }
