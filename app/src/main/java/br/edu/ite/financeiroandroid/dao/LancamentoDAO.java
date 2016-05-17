@@ -67,7 +67,7 @@ public class LancamentoDAO extends DatabaseDAO implements ILancamentoDAO {
     private void update(Lancamento entidade) {
         if(entidade != null && entidade.getCodigo() != null) {
             SQLiteDatabase db = getWritableDatabase();
-            String sql = "UPDATE " + TABELA + " SET descricao = ?, id_tipo = ? valor = ?, data_vencimento = ?, data_pagamento = ?, id_pessoa = ?   WHERE id = ? ";
+            String sql = "UPDATE " + TABELA + " SET descricao = ?, id_tipo = ?, valor = ?, data_vencimento = ?, data_pagamento = ?, id_pessoa = ?   WHERE id = ? ";
             db.execSQL(sql, new String[]{
                     entidade.getDescricao(),
                     entidade.getIdTipo(),
